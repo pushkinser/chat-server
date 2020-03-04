@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "user_dictionary")
 @Data
 @RequiredArgsConstructor
 public class User {
