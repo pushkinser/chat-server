@@ -1,4 +1,5 @@
-CREATE TABLE task (
+CREATE TABLE user (
   id          INTEGER PRIMARY KEY,
-  description VARCHAR(64) NOT NULL,
-  completed   BIT NOT NULL);
+  user_name   VARCHAR NOT NULL,
+  first_name  VARCHAR NOT NULL
+  );
