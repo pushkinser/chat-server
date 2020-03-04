@@ -1,6 +1,4 @@
-PostgreSQL local configuration
-
-db name: startup-chat
+PostgreSQL local configuration jdbc:postgresql://localhost:5432/startup-chat
 
 username: postgres
 
