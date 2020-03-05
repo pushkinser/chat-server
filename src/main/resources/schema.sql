@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS public.chat_to_user;
 DROP TABLE IF EXISTS public.message;
-DROP TABLE IF EXISTS public.chat_message;
+DROP TABLE IF EXISTS public.chat;
 DROP TABLE IF EXISTS public.user_dictionary;
 
 CREATE TABLE IF NOT EXISTS public.user_dictionary (
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS public.user_dictionary (
   user_name   VARCHAR NOT NULL,
   first_name  VARCHAR NOT NULL
   );
-CREATE TABLE IF NOT EXISTS public.chat_message (
+CREATE TABLE IF NOT EXISTS public.chat (
   id    SERIAL PRIMARY KEY,
   chat_name  VARCHAR NOT NULL
  );
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS public.chat_to_user (
  CONSTRAINT "FK_id_user" FOREIGN KEY ("id_user")
     REFERENCES "user_dictionary" ("id"),
  CONSTRAINT "FK_id_chat" FOREIGN KEY ("id_chat")
-    REFERENCES "chat_message" ("id")
+    REFERENCES "chat" ("id")
  );
 CREATE TABLE IF NOT EXISTS public.message (
  id SERIAL PRIMARY KEY,
@@ -28,5 +28,5 @@ CREATE TABLE IF NOT EXISTS public.message (
  CONSTRAINT "FK_id_user" FOREIGN KEY ("id_user")
      REFERENCES "user_dictionary" ("id"),
   CONSTRAINT "FK_id_chat" FOREIGN KEY ("id_chat")
-     REFERENCES "chat_message" ("id")
+     REFERENCES "chat" ("id")
 );

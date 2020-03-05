@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "chat_message")
+@Table(name = "chat")
 @Data
 @Builder
 @AllArgsConstructor

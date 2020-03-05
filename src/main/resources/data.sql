@@ -4,9 +4,9 @@ INSERT INTO public.user_dictionary (id,user_name, first_name) VALUES  (1, 'pushk
 COMMIT;
 INSERT INTO public.user_dictionary (id,user_name, first_name) VALUES  ('2', 'raptil', 'Alex');
 COMMIT;
-DELETE FROM public.chat_message;
+DELETE FROM public.chat;
 COMMIT;
-INSERT INTO public.chat_message (id, chat_name) VALUES  ('1', 'Big benefits');
+INSERT INTO public.chat (id, chat_name) VALUES  ('1', 'Big benefits');
 COMMIT;
 DELETE FROM public.chat_to_user;
 COMMIT;
