@@ -1,4 +1,4 @@
-DROP TABLE public.public.chat_to_user;
+DROP TABLE public.chat_to_user;
 DROP TABLE public.message;
 DROP TABLE public.chat_message;
 DROP TABLE public.user_dictionary;
