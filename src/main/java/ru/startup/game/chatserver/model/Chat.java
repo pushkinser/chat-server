@@ -9,28 +9,26 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user_dictionary")
+@Table(name = "chat_message")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Chat {
 
     @Id
+    @Column (name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String userName;
-
-    @Column
-    private String firstName;
+    @Column(name = "chat_name")
+    private String chatName;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "chat_to_user",
-            joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_chat"))
-    private List<Chat> chats;
+               joinColumns = @JoinColumn(name = "id_chat"),
+               inverseJoinColumns = @JoinColumn(name = "id_user"))
+    private List<User> users;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Message> messages;
