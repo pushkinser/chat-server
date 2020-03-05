@@ -46,10 +46,14 @@ public class ChatController {
     public List<ChatMessage> getHistoryMessage(){
         ChatMessage chatMessage1 = new ChatMessage();
         chatMessage1.setContent("123");
+        chatMessage1.setSender("history1");
+        chatMessage1.setType(ChatMessage.MessageType.CHAT);
+
         ChatMessage chatMessage2 = new ChatMessage();
         chatMessage2.setContent("234");
-        List<ChatMessage> messages = Arrays.asList(chatMessage1, chatMessage2);
-        return messages;
+        chatMessage2.setSender("history2");
+        chatMessage2.setType(ChatMessage.MessageType.CHAT);
+        return Arrays.asList(chatMessage1, chatMessage2);
     }
 
     @MessageMapping("/chat.addUser")

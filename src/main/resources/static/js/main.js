@@ -27,35 +27,35 @@ function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
     // Tell your username to the server
-    fetch("user/1",
+    fetch("chat/history",
         {
             method: "GET",
-            "header": {
-                "content-type":"application/x-www-form-urlencoded"
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
-            // headers: {
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json'
-            // }
         })
         .then( response => {
             if (response.status !== 200) {
 
                 return Promise.reject();
             }
-            return response.text()
+            console.log(response);
+            return response.json();
         })
-        .then(i => {
+        .then(historyMessage => {
             var chatMessage = {
                 sender: 'history name',
                 content: 'history message',
                 type: 'CHAT'
             };
-            console.log(i);
-            drawMessage(chatMessage);
-            // for (var i in list) {
-            //     drawMessage(i);
-            // }
+            // drawMessage(chatMessage);
+            console.log(historyMessage);
+            for (var message in historyMessage) {
+                //тут array
+                console.log(JSON.stringify(message));
+                // drawMessage(i);
+            }
         })
         .catch(() => console.log('Error'));
 
