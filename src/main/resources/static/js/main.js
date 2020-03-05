@@ -27,6 +27,38 @@ function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
     // Tell your username to the server
+    fetch("user/1",
+        {
+            method: "GET",
+            "header": {
+                "content-type":"application/x-www-form-urlencoded"
+            }
+            // headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json'
+            // }
+        })
+        .then( response => {
+            if (response.status !== 200) {
+
+                return Promise.reject();
+            }
+            return response.text()
+        })
+        .then(i => {
+            var chatMessage = {
+                sender: 'history name',
+                content: 'history message',
+                type: 'CHAT'
+            };
+            console.log(i);
+            drawMessage(chatMessage);
+            // for (var i in list) {
+            //     drawMessage(i);
+            // }
+        })
+        .catch(() => console.log('Error'));
+
     stompClient.send("/app/chat.addUser",
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
@@ -50,10 +82,15 @@ function sendMessage(event) {
     }
     event.preventDefault();
 }
+
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
+    drawMessage(message);
+}
+
+function drawMessage(message) {
     var messageElement = document.createElement('li');
-    if(message.type === 'JOIN') {
+    if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
     } else if (message.type === 'LEAVE') {
