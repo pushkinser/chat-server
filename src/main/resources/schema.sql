@@ -1,3 +1,7 @@
+DROP TABLE public.public.chat_to_user;
+DROP TABLE public.message;
+DROP TABLE public.chat_message;
+DROP TABLE public.user_dictionary;
 CREATE TABLE IF NOT EXISTS public.user_dictionary (
   id          SERIAL PRIMARY KEY,
   user_name   VARCHAR NOT NULL,
