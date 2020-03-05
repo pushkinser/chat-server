@@ -1,7 +1,5 @@
-DROP TABLE IF EXISTS public.chat_to_user;
-DROP TABLE IF EXISTS public.message;
-DROP TABLE IF EXISTS public.chat;
-DROP TABLE IF EXISTS public.user_dictionary;
+DROP SCHEMA IF EXISTS public CASCADE;
+CREATE SCHEMA IF NOT EXISTS public;
 
 CREATE TABLE IF NOT EXISTS public.user_dictionary (
   id          SERIAL PRIMARY KEY,
