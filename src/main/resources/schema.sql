@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS public.user_dictionary (
   );
 CREATE TABLE IF NOT EXISTS public.chat_message (
   id    SERIAL PRIMARY KEY,
-  name  VARCHAR NOT NULL
+  chat_name  VARCHAR NOT NULL
  );
 CREATE TABLE IF NOT EXISTS public.chat_to_user (
  id_user int not null,

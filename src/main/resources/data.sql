@@ -6,7 +6,7 @@ INSERT INTO public.user_dictionary (id,user_name, first_name) VALUES  ('2', 'rap
 COMMIT;
 DELETE FROM public.chat_message;
 COMMIT;
-INSERT INTO public.chat_message (id, name) VALUES  ('1', 'Big benefits');
+INSERT INTO public.chat_message (id, chat_name) VALUES  ('1', 'Big benefits');
 COMMIT;
 DELETE FROM public.chat_to_user;
 COMMIT;
