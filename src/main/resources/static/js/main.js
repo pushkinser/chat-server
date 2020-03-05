@@ -40,22 +40,12 @@ function onConnected() {
 
                 return Promise.reject();
             }
-            console.log(response);
             return response.json();
         })
         .then(historyMessage => {
-            var chatMessage = {
-                sender: 'history name',
-                content: 'history message',
-                type: 'CHAT'
-            };
-            // drawMessage(chatMessage);
-            console.log(historyMessage);
-            for (var message in historyMessage) {
-                //тут array
-                console.log(JSON.stringify(message));
-                // drawMessage(i);
-            }
+            historyMessage.forEach(function(item, historyMessage){
+                 drawMessage(item);
+            });
         })
         .catch(() => console.log('Error'));
 
