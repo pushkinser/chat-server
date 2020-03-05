@@ -6,7 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "message")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,4 +27,14 @@ public class Message {
 
     @Column
     private  String message;
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", chat=" + chat.getId() +
+                ", user=" + user.getId() +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

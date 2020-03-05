@@ -1,16 +1,14 @@
 package ru.startup.game.chatserver.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "chat")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +28,14 @@ public class Chat {
                inverseJoinColumns = @JoinColumn(name = "id_user"))
     private List<User> users;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat")
     private List<Message> messages;
+
+    @Override
+    public String toString() {
+        return "Chat{" +
+                "id=" + id +
+                ", chatName='" + chatName + '\'' +
+                '}';
+    }
 }
