@@ -1,13 +1,13 @@
-CREATE TABLE IF NOT EXISTS user_dictionary (
+CREATE TABLE IF NOT EXISTS public.user_dictionary (
   id          SERIAL PRIMARY KEY,
   user_name   VARCHAR NOT NULL,
   first_name  VARCHAR NOT NULL
   );
-CREATE TABLE IF NOT EXISTS chat_message (
+CREATE TABLE IF NOT EXISTS public.chat_message (
   id    SERIAL PRIMARY KEY,
   name  VARCHAR NOT NULL
  );
-CREATE TABLE IF NOT EXISTS chat_to_user (
+CREATE TABLE IF NOT EXISTS public.chat_to_user (
  id_user int not null,
  id_chat int not null,
  CONSTRAINT "FK_id_user" FOREIGN KEY ("id_user")
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS chat_to_user (
  CONSTRAINT "FK_id_chat" FOREIGN KEY ("id_chat")
     REFERENCES "chat_message" ("id")
  );
-CREATE TABLE IF NOT EXISTS message (
+CREATE TABLE IF NOT EXISTS public.message (
  id SERIAL PRIMARY KEY,
  id_chat int NOT NULL,
  id_user int NOT NULL,
