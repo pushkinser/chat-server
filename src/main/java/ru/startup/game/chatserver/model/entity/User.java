@@ -1,6 +1,8 @@
-package ru.startup.game.chatserver.model;
+package ru.startup.game.chatserver.model.entity;
 
 import lombok.*;
+import ru.startup.game.chatserver.model.entity.Chat;
+import ru.startup.game.chatserver.model.entity.Message;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,7 +32,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "id_chat"))
     private List<Chat> chats;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch=FetchType.LAZY)
     private List<Message> messages;
 
     @Override

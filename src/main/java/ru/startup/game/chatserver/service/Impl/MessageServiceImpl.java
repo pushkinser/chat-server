@@ -2,7 +2,9 @@ package ru.startup.game.chatserver.service.Impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.startup.game.chatserver.model.Message;
+import ru.startup.game.chatserver.model.dto.MessageDto;
+import ru.startup.game.chatserver.model.entity.Message;
+import ru.startup.game.chatserver.model.mapper.MessageMapper;
 import ru.startup.game.chatserver.repository.MessageRepository;
 import ru.startup.game.chatserver.service.MessageService;
 
@@ -13,8 +15,10 @@ public class MessageServiceImpl implements MessageService {
 
     private MessageRepository messageRepository;
 
+    private MessageMapper messageMapper;
+
     @Override
-    public void save(Message message) {
-        messageRepository.save(message);
+    public void save(MessageDto message) {
+        messageRepository.save(messageMapper.messageDtoToMessage(message));
     }
 }

@@ -20,11 +20,11 @@ CREATE TABLE IF NOT EXISTS public.chat_to_user (
  );
 CREATE TABLE IF NOT EXISTS public.message (
  id SERIAL PRIMARY KEY,
- id_chat int NOT NULL,
+ --id_chat int NOT NULL,
  id_user int NOT NULL,
  message VARCHAR NOT NULL,
  CONSTRAINT "FK_id_user" FOREIGN KEY ("id_user")
-     REFERENCES "user_dictionary" ("id"),
-  CONSTRAINT "FK_id_chat" FOREIGN KEY ("id_chat")
-     REFERENCES "chat" ("id")
+     REFERENCES "user_dictionary" ("id")--,
+  --CONSTRAINT "FK_id_chat" FOREIGN KEY ("id_chat")
+     --REFERENCES "chat" ("id")
 );

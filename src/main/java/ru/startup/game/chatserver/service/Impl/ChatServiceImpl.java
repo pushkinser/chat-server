@@ -2,7 +2,9 @@ package ru.startup.game.chatserver.service.Impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.startup.game.chatserver.model.Chat;
+import ru.startup.game.chatserver.model.dto.ChatDto;
+import ru.startup.game.chatserver.model.entity.Chat;
+import ru.startup.game.chatserver.model.mapper.ChatMapper;
 import ru.startup.game.chatserver.repository.ChatRepository;
 import ru.startup.game.chatserver.service.ChatService;
 
@@ -13,9 +15,12 @@ import java.util.Optional;
 public class ChatServiceImpl implements ChatService {
 
     private ChatRepository chatRepository;
+
+    private ChatMapper chatMapper;
+
     @Override
-    public Chat findById(Long id) {
+    public ChatDto findById(Long id) {
         Optional<Chat> chatOptional = chatRepository.findById(id);
-        return chatOptional.orElse(null);
+        return chatMapper.chatToChatDto(chatOptional.orElse(null));
     }
 }

@@ -1,4 +1,4 @@
-package ru.startup.game.chatserver.model;
+package ru.startup.game.chatserver.model.entity;
 
 import lombok.*;
 
@@ -28,8 +28,8 @@ public class Chat {
                inverseJoinColumns = @JoinColumn(name = "id_user"))
     private List<User> users;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat")
-    private List<Message> messages;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat")
+//    private List<Message> messages;
 
     @Override
     public String toString() {

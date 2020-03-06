@@ -1,4 +1,4 @@
-package ru.startup.game.chatserver.model;
+package ru.startup.game.chatserver.model.entity;
 
 import lombok.*;
 
@@ -17,11 +17,11 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_chat", referencedColumnName = "id")
-    private Chat chat;
+//    @ManyToOne
+//    @JoinColumn(name = "id_chat", referencedColumnName = "id")
+//    private Chat chat;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User user;
 
@@ -32,7 +32,6 @@ public class Message {
     public String toString() {
         return "Message{" +
                 "id=" + id +
-                ", chat=" + chat.getId() +
                 ", user=" + user.getId() +
                 ", message='" + message + '\'' +
                 '}';
