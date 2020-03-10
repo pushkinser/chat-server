@@ -5,7 +5,7 @@ import org.mapstruct.factory.Mappers;
 import ru.startup.game.chatserver.model.dto.UserDto;
 import ru.startup.game.chatserver.model.entity.User;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
