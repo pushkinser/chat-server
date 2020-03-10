@@ -1,5 +1,6 @@
 package ru.startup.game.chatserver.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import ru.startup.game.chatserver.model.entity.Chat;
 import ru.startup.game.chatserver.model.entity.Message;

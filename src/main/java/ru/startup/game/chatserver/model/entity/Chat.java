@@ -22,14 +22,15 @@ public class Chat {
     @Column(name = "chat_name")
     private String chatName;
 
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "chat_to_user",
                joinColumns = @JoinColumn(name = "id_chat"),
                inverseJoinColumns = @JoinColumn(name = "id_user"))
     private List<User> users;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat")
-//    private List<Message> messages;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat")
+    private List<Message> messages;
 
     @Override
     public String toString() {

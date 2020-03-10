@@ -1,5 +1,6 @@
 package ru.startup.game.chatserver.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,9 +18,10 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_chat", referencedColumnName = "id")
-//    private Chat chat;
+    @ManyToOne
+    @JoinColumn(name = "id_chat", referencedColumnName = "id")
+    private Chat chat;
+
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "id_user", referencedColumnName = "id")

@@ -1,5 +1,6 @@
 package ru.startup.game.chatserver.model.mapper;
 
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import ru.startup.game.chatserver.model.dto.MessageDto;

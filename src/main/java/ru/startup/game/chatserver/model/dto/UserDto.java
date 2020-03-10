@@ -16,6 +16,6 @@ public class UserDto {
     private Long id;
     private String userName;
     private String firstName;
-    private List<ChatDto> chats;
-    private List<MessageDto> messages;
+    //private List<ChatDto> chats;
+   // private List<MessageDto> messages;
 }

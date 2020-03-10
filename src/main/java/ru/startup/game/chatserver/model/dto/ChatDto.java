@@ -16,4 +16,6 @@ public class ChatDto {
     private Long id;
     private String chatName;
     private List<UserDto> users;
+    private List<MessageDto> messages;
+
 }

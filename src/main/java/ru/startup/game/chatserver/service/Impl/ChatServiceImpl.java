@@ -23,4 +23,10 @@ public class ChatServiceImpl implements ChatService {
         Optional<Chat> chatOptional = chatRepository.findById(id);
         return chatMapper.chatToChatDto(chatOptional.orElse(null));
     }
+
+    @Override
+    public Chat findModelById(Long id) {
+        Optional<Chat> chatOptional = chatRepository.findById(id);
+        return chatOptional.orElse(null);
+    }
 }
