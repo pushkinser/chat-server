@@ -28,6 +28,22 @@ body:before {
     content: "";
     z-index: 0;
 }
+*{
+  box-sizing: border-box;
+}
+.container-table{
+  display:flex;
+  width:700px;
+  height:600px;
+}
+.chatsArea{
+  display: table-cell
+  width:0%;
+}
+.messagesArea{
+  display: table-cell;
+  width:100%;
+}
 .clearfix:after {
     display: block;
     content: "";
@@ -159,8 +175,12 @@ button.accent {
     font-size: 14px;
     word-wrap: break-word;
 }
-#chat-page .chat-message {
+#chat-page .chat-message  {
     padding-left: 68px;
+    position: relative;
+}
+.area-message{
+    padding-left: 20px;
     position: relative;
 }
 #chat-page .chat-message i {

@@ -5,6 +5,7 @@ var usernameForm = document.querySelector('#usernameForm');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
+var chatsArea = document.querySelector('#chatsArea');
 var connectingElement = document.querySelector('.connecting');
 var stompClient = null;
 var username = null;
@@ -47,12 +48,35 @@ function onConnected() {
                  drawMessage(item);
             });
         })
-        .catch(() => console.log('Error'));
+        .catch(() => console.log('Error messages'));
+    fetch("chats",
+                    {
+                        method: "POST",
+                        body: JSON.stringify({userName:username}),
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then( response => {
+                        if (response.status !== 200) {
+
+                            return Promise.reject();
+                        }
+                        return response.json();
+                    })
+                    .then(chats => {
+                        chats.forEach(function(item, chats){
+                             drawChatsArea(item);
+                        });
+                    })
+                    .catch(() => console.log('Error chats'));
 
     stompClient.send("/app/chat.addUser",
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
     )
+
     connectingElement.classList.add('hidden');
 }
 function onError(error) {
@@ -77,7 +101,22 @@ function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
     drawMessage(message);
 }
+function drawChatsArea(chat){
 
+    var chatsElement = document.createElement('li');
+     chatsElement.classList.add('.area-message')
+    var avatarElement = document.createElement('i');
+    var avatarText = document.createTextNode (chat.chatName[0]);
+    avatarElement.appendChild (avatarText);
+    avatarElement.style['background-color'] = getAvatarColor(chat.chatName);
+    chatsElement.appendChild(avatarElement);
+    var chatNameElement = document.createElement('span');
+    var chatNameText = document.createTextNode(chat.chatName);
+    chatNameElement.appendChild(chatNameText);
+    chatsElement.appendChild(chatNameElement);
+    chatsArea.appendChild(chatsElement);
+    chatsArea.scrollTop = chatsArea.scrollHeight;
+}
 function drawMessage(message) {
     var messageElement = document.createElement('li');
     if (message.type === 'JOIN') {

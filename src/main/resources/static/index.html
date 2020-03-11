@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html >
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Spring Boot WebSocket Chat Application</title>
@@ -30,6 +31,12 @@
         <div class="connecting">
             Connecting...
         </div>
+        <div class="container-table">
+        <div  class="chatsArea">
+            <ul id = "chatsArea">
+            </ul>
+        </div>
+        <div  class="messagesArea">
         <ul id="messageArea">
         </ul>
         <form id="messageForm" name="messageForm">
@@ -40,6 +47,8 @@
                 </div>
             </div>
         </form>
+        </div>
+        </div>
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
