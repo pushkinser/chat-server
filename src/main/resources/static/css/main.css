@@ -32,7 +32,8 @@ body:before {
   box-sizing: border-box;
 }
 .container-table{
-  display: table-row;
+  width:700px;
+  height:600px;
 }
 .chatsArea{
   display: table-cell
@@ -40,7 +41,7 @@ body:before {
 }
 .messagesArea{
   display: table-cell;
-  width:60%;
+  width:100%;
 }
 .clearfix:after {
     display: block;

@@ -12,6 +12,4 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     public Optional<User> findUserByUserName(String userName);
-
-    public List<Chat> findChatsById(Long id);
 }

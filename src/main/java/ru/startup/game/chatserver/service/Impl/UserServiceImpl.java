@@ -29,9 +29,5 @@ public class UserServiceImpl implements UserService {
         return userMapper.userToUserDto(userOptional.orElse(null));
     }
 
-    @Override
-    public List<ChatDto> findChatsByUserName(String userName) {
-        UserDto userDto = findUserByUserName(userName);
-        return chatMapper.chatToChatDto(userRepository.findChatsById(userDto.getId()));
-    }
+
 }

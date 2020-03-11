@@ -11,5 +11,4 @@ public interface UserService {
 
     public UserDto findUserByUserName(String userName);
 
-    public List<ChatDto> findChatsByUserName(String userName);
 }
