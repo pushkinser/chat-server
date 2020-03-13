@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.startup.game.chatserver.model.dto.ChatMessageDto;
-import ru.startup.game.chatserver.model.dto.ChatDto;
-import ru.startup.game.chatserver.model.dto.MessageDto;
-import ru.startup.game.chatserver.model.dto.UserDto;
+import ru.startup.game.chatserver.model.dto.*;
 import ru.startup.game.chatserver.service.ChatService;
 import ru.startup.game.chatserver.service.MessageService;
 import ru.startup.game.chatserver.service.UserService;
@@ -52,10 +49,7 @@ public class ChatController {
         return chatMessages;
     }
 
-    @PostMapping("label")
-    public void saveLabel (@Payload ChatMessageDto chatMessage){
 
-    }
 
     @PostMapping("chats")
     public List<ChatDto> getChats(@RequestBody UserDto user){
