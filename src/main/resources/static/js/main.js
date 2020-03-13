@@ -143,6 +143,14 @@ function drawMessage(message) {
     messageElement.appendChild(textElement);
     if (message.type === 'CHAT') {
         var select = document.createElement('select');
+        var option1 = document.createElement('option');
+        var option2 = document.createElement('option');
+        var textInOption = document.createTextNode('li1');
+        var textInOption1 = document.createTextNode('li2');
+        option1.appendChild(textInOption);
+        option2.appendChild(textInOption1);
+        select.appendChild(option1);
+        select.appendChild(option2);
         messageElement.appendChild(select);
     }
     messageArea.appendChild(messageElement);
