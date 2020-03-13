@@ -37,7 +37,8 @@ public class ChatController {
         UserDto user = userService.findUserByUserName(chatMessage.getSender());
         message.setUser(user);
         message.setMessage(chatMessage.getContent());
-        messageService.save(message);
+        MessageDto saveMessage = messageService.save(message);
+        chatMessage.setId(saveMessage.getId());
         return chatMessage;
     }
 
@@ -46,9 +47,14 @@ public class ChatController {
         List<ChatMessage> chatMessages;
         List<MessageDto> messages = chatService.findById(1L).getMessages();
         chatMessages = messages.stream()
-                .map(messageDto -> new ChatMessage(ChatMessage.MessageType.CHAT, messageDto.getMessage(), messageDto.getUser().getUserName()))
+                .map(messageDto -> new ChatMessage(messageDto.getId(), ChatMessage.MessageType.CHAT, messageDto.getMessage(), messageDto.getUser().getUserName(),messageDto.getLabels()))
                 .collect(Collectors.toList());
         return chatMessages;
+    }
+
+    @PostMapping("label")
+    public void saveLabel (@Payload ChatMessage chatMessage){
+        chatMessage
     }
 
     @PostMapping("chats")

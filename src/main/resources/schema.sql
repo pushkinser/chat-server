@@ -28,3 +28,16 @@ CREATE TABLE IF NOT EXISTS public.message (
   CONSTRAINT "FK_id_chat" FOREIGN KEY ("id_chat")
      REFERENCES "chat" ("id")
 );
+CREATE TABLE IF NOT EXISTS public.label (
+ id SERIAL PRIMARY KEY,
+ label_name VARCHAR NOT NULL,
+ type VARCHAR
+);
+CREATE TABLE IF NOT EXISTS public.label_to_message (
+ id_label int not null,
+ id_message int not null,
+ CONSTRAINT "FK_id_label" FOREIGN KEY ("id_label")
+    REFERENCES "label" ("id"),
+ CONSTRAINT "FK_id_message" FOREIGN KEY ("id_message")
+    REFERENCES "message" ("id")
+);

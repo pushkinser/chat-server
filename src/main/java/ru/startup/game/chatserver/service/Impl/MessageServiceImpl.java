@@ -23,10 +23,11 @@ public class MessageServiceImpl implements MessageService {
 
 
     @Override
-    public void save(MessageDto messageDto) {
+    public MessageDto save(MessageDto messageDto) {
         Message message = messageMapper.messageDtoToMessage(messageDto);
         Chat chat = chatService.findModelById(1L);
         message.setChat(chat);
-        messageRepository.save(message);
+        Message saveMessage = messageRepository.save(message);
+        return messageMapper.messageToMessageDto(saveMessage);
     }
 }

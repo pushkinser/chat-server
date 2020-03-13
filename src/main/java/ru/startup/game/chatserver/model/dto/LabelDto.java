@@ -5,16 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageDto {
+public class LabelDto {
 
     private Long id;
-    private UserDto user;
-    private String message;
-    private List<LabelDto> labels;
+    private String labelName;
+    private String type;
 }

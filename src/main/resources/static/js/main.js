@@ -142,19 +142,35 @@ function drawMessage(message) {
     textElement.appendChild(messageText);
     messageElement.appendChild(textElement);
     if (message.type === 'CHAT') {
-        var select = document.createElement('select');
+        var form = document.createElement('form');
+        form.setAttribute('id', 'form-'+message.id);
+        var input = document.createElement('input');
+        input.setAttribute('list','label-list');
+        input.setAttribute('placeholder','abv');
+        var dataList = document.createElement('dataList');
+        dataList.setAttribute('id','label-list');
         var option1 = document.createElement('option');
-        var option2 = document.createElement('option');
-        var textInOption = document.createTextNode('li1');
-        var textInOption1 = document.createTextNode('li2');
-        option1.appendChild(textInOption);
-        option2.appendChild(textInOption1);
-        select.appendChild(option1);
-        select.appendChild(option2);
-        messageElement.appendChild(select);
+        option1.setAttribute('value','Abriv');
+        dataList.appendChild(option1);
+        input.appendChild(dataList);
+        form.appendChild(input);
+        messageElement.appendChild(form);
     }
     messageArea.appendChild(messageElement);
     messageArea.scrollTop = messageArea.scrollHeight;
+}
+function sendLabel(label){
+    var values = $(select).serialize();
+    console.log (values);       // See if you get the serialized data in console.
+
+    $.ajax({
+        type: 'POST',
+        url: "http://www.mysite.com/update_categories.php"
+        data: values,
+        success: function (data) {
+            document.getElementById("my_div").innerHTML = data;
+        }
+    });
 }
 function getAvatarColor(messageSender) {
     var hash = 0;
