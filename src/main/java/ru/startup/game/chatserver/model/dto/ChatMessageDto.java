@@ -1,4 +1,4 @@
-package ru.startup.game.chatserver.model;
+package ru.startup.game.chatserver.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatMessage {
+public class ChatMessageDto {
 
     private Long id;
     private MessageType type;

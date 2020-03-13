@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.startup.game.chatserver.model.ChatMessage;
+import ru.startup.game.chatserver.model.dto.ChatMessageDto;
 import ru.startup.game.chatserver.model.dto.ChatDto;
 import ru.startup.game.chatserver.model.dto.MessageDto;
 import ru.startup.game.chatserver.model.dto.UserDto;
@@ -32,7 +32,7 @@ public class ChatController {
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+    public ChatMessageDto sendMessage(@Payload ChatMessageDto chatMessage) {
         MessageDto message = new MessageDto();
         UserDto user = userService.findUserByUserName(chatMessage.getSender());
         message.setUser(user);
@@ -43,17 +43,17 @@ public class ChatController {
     }
 
     @GetMapping("chat/history")
-    public List<ChatMessage> getHistoryMessage(){
-        List<ChatMessage> chatMessages;
+    public List<ChatMessageDto> getHistoryMessage(){
+        List<ChatMessageDto> chatMessages;
         List<MessageDto> messages = chatService.findById(1L).getMessages();
         chatMessages = messages.stream()
-                .map(messageDto -> new ChatMessage(messageDto.getId(), ChatMessage.MessageType.CHAT, messageDto.getMessage(), messageDto.getUser().getUserName(),messageDto.getLabels()))
+                .map(messageDto -> new ChatMessageDto(messageDto.getId(), ChatMessageDto.MessageType.CHAT, messageDto.getMessage(), messageDto.getUser().getUserName(),messageDto.getLabels()))
                 .collect(Collectors.toList());
         return chatMessages;
     }
 
     @PostMapping("label")
-    public void saveLabel (@Payload ChatMessage chatMessage){
+    public void saveLabel (@Payload ChatMessageDto chatMessage){
 
     }
 
@@ -66,7 +66,7 @@ public class ChatController {
 
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
-    public ChatMessage addUser(@Payload ChatMessage chatMessage,
+    public ChatMessageDto addUser(@Payload ChatMessageDto chatMessage,
                                SimpMessageHeaderAccessor headerAccessor) {
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;

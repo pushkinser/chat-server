@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import org.springframework.web.socket.messaging.SessionSubscribeEvent;
-import ru.startup.game.chatserver.model.ChatMessage;
+import ru.startup.game.chatserver.model.dto.ChatMessageDto;
 import ru.startup.game.chatserver.service.ChatService;
 
 @Component
@@ -35,12 +35,12 @@ public class WebSocketEventListener {
         String username = (String) headerAccessor.getSessionAttributes().get("username");
         if (username != null) {
 
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setContent("f,d");
-            chatMessage.setType(ChatMessage.MessageType.CHAT);
-            chatMessage.setSender(username);
+            ChatMessageDto chatMessageDto = new ChatMessageDto();
+            chatMessageDto.setContent("f,d");
+            chatMessageDto.setType(ChatMessageDto.MessageType.CHAT);
+            chatMessageDto.setSender(username);
 
-            messagingTemplate.convertAndSendToUser(username,"/topic/public", chatMessage);
+            messagingTemplate.convertAndSendToUser(username,"/topic/public", chatMessageDto);
             logger.info("Send history messages to new user");
         }
 
@@ -55,11 +55,11 @@ public class WebSocketEventListener {
         if (username != null) {
             logger.info("User Disconnected : " + username);
 
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setType(ChatMessage.MessageType.LEAVE);
-            chatMessage.setSender(username);
+            ChatMessageDto chatMessageDto = new ChatMessageDto();
+            chatMessageDto.setType(ChatMessageDto.MessageType.LEAVE);
+            chatMessageDto.setSender(username);
 
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
+            messagingTemplate.convertAndSend("/topic/public", chatMessageDto);
         }
     }
 }
