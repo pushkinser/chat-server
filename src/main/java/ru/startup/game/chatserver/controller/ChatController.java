@@ -54,7 +54,7 @@ public class ChatController {
 
     @PostMapping("label")
     public void saveLabel (@Payload ChatMessage chatMessage){
-        chatMessage
+
     }
 
     @PostMapping("chats")

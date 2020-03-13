@@ -165,7 +165,7 @@ function sendLabel(label){
 
     $.ajax({
         type: 'POST',
-        url: "http://www.mysite.com/update_categories.php"
+        url: "http://www.mysite.com/update_categories.php",
         data: values,
         success: function (data) {
             document.getElementById("my_div").innerHTML = data;
