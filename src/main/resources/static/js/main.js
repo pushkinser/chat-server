@@ -141,6 +141,10 @@ function drawMessage(message) {
     var messageText = document.createTextNode(message.content);
     textElement.appendChild(messageText);
     messageElement.appendChild(textElement);
+    if (message.type === 'CHAT') {
+        var select = document.createElement('select');
+        messageElement.appendChild(select);
+    }
     messageArea.appendChild(messageElement);
     messageArea.scrollTop = messageArea.scrollHeight;
 }
