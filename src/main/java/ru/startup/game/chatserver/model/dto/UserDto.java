@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
@@ -16,6 +15,4 @@ public class UserDto {
     private Long id;
     private String userName;
     private String firstName;
-    //private List<ChatDto> chats;
-   // private List<MessageDto> messages;
 }

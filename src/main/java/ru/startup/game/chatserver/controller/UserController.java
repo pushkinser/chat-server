@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.startup.game.chatserver.model.entity.User;
 import ru.startup.game.chatserver.repository.UserRepository;
 
-import java.util.Optional;
-
 @RestController
 @AllArgsConstructor
 public class UserController {
@@ -17,9 +15,8 @@ public class UserController {
 
     @GetMapping("user/{id}")
     public String getUserNameById(@PathVariable Long id) {
-        Optional<User> user = userRepository.findById(id);
-
-        return user.map(User::getUserName)
+        return userRepository.findById(id)
+                .map(User::getUserName)
                 .orElse("Not found");
     }
 }
