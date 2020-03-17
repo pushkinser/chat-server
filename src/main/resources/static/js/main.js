@@ -24,10 +24,8 @@ function connect(event) {
     }
     event.preventDefault();
 }
-function onConnected() {
-    // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public', onMessageReceived);
-    // Tell your username to the server
+
+function loadAndShowChatHistory() {
     fetch("chat/history",
         {
             method: "GET",
@@ -36,7 +34,7 @@ function onConnected() {
                 'Content-Type': 'application/json'
             }
         })
-        .then( response => {
+        .then(response => {
             if (response.status !== 200) {
 
                 return Promise.reject();
@@ -44,45 +42,54 @@ function onConnected() {
             return response.json();
         })
         .then(historyMessage => {
-            historyMessage.forEach(function(item, historyMessage){
-                 drawMessage(item);
+            historyMessage.forEach(function (item, historyMessage) {
+                drawMessage(item);
             });
         })
         .catch(() => console.log('Error messages'));
+}
+
+function loadAndShowChatsList() {
     fetch("chats",
-                    {
-                        method: "POST",
-                        body: JSON.stringify({userName:username}),
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then( response => {
-                        if (response.status !== 200) {
+        {
+            method: "POST",
+            body: JSON.stringify({userName: username}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.status !== 200) {
 
-                            return Promise.reject();
-                        }
-                        return response.json();
-                    })
-                    .then(chats => {
-                        chats.forEach(function(item, chats){
-                             drawChatsArea(item);
-                        });
-                    })
-                    .catch(() => console.log('Error chats'));
+                return Promise.reject();
+            }
+            return response.json();
+        })
+        .then(chats => {
+            chats.forEach(function (item, chats) {
+                drawChatsArea(item);
+            });
+        })
+        .catch(() => console.log('Error chats'));
+}
 
+function onConnected() {
+    stompClient.subscribe('/topic/public', onMessageReceived);
+    loadAndShowChatHistory();
+    loadAndShowChatsList();
     stompClient.send("/app/chat.addUser",
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
-    )
-
+    );
     connectingElement.classList.add('hidden');
 }
+
 function onError(error) {
     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
     connectingElement.style.color = 'red';
 }
+
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
     if(messageContent && stompClient) {
@@ -101,8 +108,8 @@ function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
     drawMessage(message);
 }
-function drawChatsArea(chat){
 
+function drawChatsArea(chat){
     var chatsElement = document.createElement('li');
      chatsElement.classList.add('.area-message')
     var avatarElement = document.createElement('i');
@@ -117,6 +124,8 @@ function drawChatsArea(chat){
     chatsArea.appendChild(chatsElement);
     chatsArea.scrollTop = chatsArea.scrollHeight;
 }
+
+//TODO: refactor method drawMessage.
 function drawMessage(message) {
     var messageElement = document.createElement('li');
     if (message.type === 'JOIN') {
@@ -137,10 +146,12 @@ function drawMessage(message) {
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);
     }
+
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(message.content);
     textElement.appendChild(messageText);
     messageElement.appendChild(textElement);
+
     if (message.type === 'CHAT') {
         var form = document.createElement('form');
         form.setAttribute('id', 'form-'+message.id);
@@ -156,9 +167,11 @@ function drawMessage(message) {
         form.appendChild(input);
         messageElement.appendChild(form);
     }
+
     messageArea.appendChild(messageElement);
     messageArea.scrollTop = messageArea.scrollHeight;
 }
+
 function sendLabel(label){
     var values = $(select).serialize();
     console.log (values);       // See if you get the serialized data in console.
@@ -172,6 +185,7 @@ function sendLabel(label){
         }
     });
 }
+
 function getAvatarColor(messageSender) {
     var hash = 0;
     for (var i = 0; i < messageSender.length; i++) {
